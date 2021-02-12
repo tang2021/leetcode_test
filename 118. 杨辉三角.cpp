@@ -12,6 +12,7 @@
  // [1,4,6,4,1]
 // ]
 #include<vector>
+using namespace std;
 vector<vector<int>> generate(int numRows) {
     vector<vector<int>> ans;
     for(int i=0;i<numRows;i++){
