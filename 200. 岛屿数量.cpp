@@ -55,7 +55,7 @@ class UnionFind{
         return cnt;
     }
 };
-int numIslands(vector<vector<int>>&grids){
+int numIslands(vector<vector<char>>&grids){
     int n=grids.size();
     int m=grids[0].size();
     UnionFind uf(n*m);
@@ -71,4 +71,24 @@ int numIslands(vector<vector<int>>&grids){
         if(j>0&&grids[i][j-1]=='1')uf.merge(id,id-1);
     }
     return uf.getCount()-space;
+}
+
+int numIslands1(vector<vector<char>>&grid){
+    int res=0;
+    for(int i=0;i<grid.size();i++)
+    for(int j=0;j<grid[0].size();j++){
+        if(grid[i][j]=='1'){
+            res++;
+            dfs(grid,i,j);
+        }
+    }
+    return res;
+}
+void dfs(vector<vector<char>>&grid,int row,int col){
+    if(row<0||row>=grid.size()||col<0||col>=grid[0].size()||grid[row][col]=='0')
+    return ;
+    dfs(grid,row+1,col);
+    dfs(grid,row-1,col);
+    dfs(grid,row,col-1);
+    dfs(grid,row,col+1);
 }
