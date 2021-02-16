@@ -40,3 +40,59 @@ int dfs(vector<vector<int>>&grid,int row,int col){
     int right = dfs(grid,row,col+1);
     return up+down+left+right+1;
 }
+class UnionFind{
+    public:
+    int n,cnt;
+    vector<int>rank,parent;
+    UnionFind(int _n):n(_n),cnt(_n),rank(_n,1),parent(_n){
+        for(int i=0;i<n;i++)parent[i]=i;
+    }
+    int find(int x){
+        while(x!=parent[x]){
+            parent[x]=find(parent[x]);
+            x=parent[x];
+            }
+        return parent[x];
+    }
+    bool connected(int x,int y){
+        return find(x)==find(y);
+    }
+    bool merge(int x,int y){
+        x=find(x);
+        y=find(y);
+        if(x==y)return false;
+        if(rank[x]>rank[y])swap(x,y);
+        parent[x]=y;
+        rank[y]+=rank[x];
+        cnt--;
+        return true;
+    }
+    int getCount(void){
+        return cnt;
+    }
+    int getMaxRank(void){
+        int ans=0;
+        for(int i=0;i<n;i++){
+        ans=max(ans,rank[i]);
+        }
+        return ans;
+    }
+};
+int maxAreaOfIsland1(vector<vector<int>>& grid) {
+    int res=0;
+    bool hasOne =false;
+    int n=grid.size();
+    int m=grid[0].size();
+    UnionFind uf(n*m);
+    for(int i=0;i<n;i++)
+    for(int j=0;j<m;j++){
+        int id=i*m+j;
+        if(grid[i][j]==1){
+            hasOne = true;
+            if(i+1<n&&grid[i + 1][j] == 1)uf.merge(id,id+m);
+            if(j+1<m&&grid[i][j+1] == 1)uf.merge(id,id+1);
+        }
+    }
+    if(!hasOne)return 0;//排除[[0]]情况。
+    return uf.getMaxRank();
+}
