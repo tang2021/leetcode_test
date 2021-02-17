@@ -32,6 +32,8 @@
 // 提示：
 // 给定树中的结点数介于 1 和 100 之间。
 // 每个结点都有一个从 0 到 1000 范围内的唯一整数值。
+#include<stack>
+using namespace std;
 typedef struct TreeNode{
     int val;
     TreeNode *left,*right;
@@ -53,4 +55,22 @@ TreeNode inorder(TreeNode* root){
     p->right=root;
     p=p->right;
     inorder(root->right);
+}
+
+TreeNode* increasingBST1(TreeNode* root){
+    stack<TreeNode*>s;
+    TreeNode* dummy =new TreeNode(0);
+    TreeNode* p=dummy,*curr=root;
+    while(!s.empty()||curr!=nullptr){
+        while(curr){
+            s.push(curr);
+            curr=curr->left;
+        }
+        curr=s.top();s.pop();
+        curr->left=nullptr;
+        p->right=curr;
+        p=p->right;
+        curr=curr->right;
+    }
+    return dummy->right;
 }
