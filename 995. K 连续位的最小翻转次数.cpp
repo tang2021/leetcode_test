@@ -33,3 +33,20 @@ int minKBitsFlips(vector<int>&A,int K){
     }
     return ans;
 }
+
+int minKBitsFlips(vector<int>&A,int K){
+    int ans=0;
+    int n=A.size();
+    int sum=0;
+    vector<int>d(n+1,0);
+    for(int i=0;i<n;i++){
+        sum+=d[i];
+        if(1&(sum+A[i]) == 1){
+            if(i+K>n)return -1;
+            d[i+1]++;
+            d[i+K]--;
+            ans++;
+        }
+    }
+    return ans;
+}
