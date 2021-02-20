@@ -14,6 +14,7 @@
 // 0 < len(land[i]) <= 1000
 // 通过次数13,907提交次数22,922
 #include<vector>
+#include<algorithm>
 using namespace std;
 vector<int>res;
 int N,M;
