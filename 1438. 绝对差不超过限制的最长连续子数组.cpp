@@ -29,6 +29,7 @@
 // 0 <= limit <= 10^9
 #include<vector>
 #include<deque>
+#include<map>
 using namespace std;
 int longestSubarray(vector<int>&nums,int limit){
     deque<int>minq,maxq;
@@ -47,6 +48,20 @@ int longestSubarray(vector<int>&nums,int limit){
         }
         res=max(res,right-left+1);
         right++;
+    }
+    return res;
+}
+int longestSubarray(vector<int>&nums,int limit){
+    map<int,int>m;
+    int left=0,res=0;
+    for(int i=0;i<nums.size();i++){
+        m[nums[i]]++;
+        while(m.rbegin()->first-m.begin()->first>limit){
+            m[nums[left]]--;
+            if(m[nums[left]]==0)m.erase(nums[left]);
+            left++;
+        }
+        res=max(res,i-left+1);
     }
     return res;
 }
