@@ -28,7 +28,23 @@ int lengthOfLongestSubstring(string s){
             occ.push(s[i]);
             left++;
         }
-        ans=max(ans,left-i+1);
+        ans=max(ans,i-left+1);
+    }
+    return ans;
+}
+
+int lengthOfLongestSubstring(string& s){
+
+    int n=s.size();
+    if(n<1)return 0;
+    int m[256]={0};
+    int ans=0,left=0;
+    for(int i=0;i<n;i++){
+        m[s[i]]++;
+        while(m[s[i]]>1){
+            m[s[left++]]--;
+        }
+        ans=max(ans,i-left+1);
     }
     return ans;
 }
