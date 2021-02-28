@@ -26,12 +26,12 @@ bool isMonotonic(vector<int>&A)
 bool check(vector<int>&A,bool flg){
     int n=A.size();
     for(int i=1;i<n;i++){
-        if(nums[i]==nums[i-1])continue;
+        if(A[i]==A[i-1])continue;
         if(flg){
-            if(nums[i]<nums[i-1])return false;
+            if(A[i]<A[i-1])return false;
         }
         else{
-            if(nums[i]>nums[i-1])return false;
+            if(A[i]>A[i-1])return false;
         }
     }
     return true;
