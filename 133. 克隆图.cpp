@@ -43,7 +43,7 @@ class Node{
     int val;
     vector<Node*>neighbors;
     Node(){val=0;neighbors=vector<Node*>();}
-    Node(int _val){val=_val;neighbors=vector<Node*>()}
+    Node(int _val){val=_val;neighbors=vector<Node*>();}
     Node(int _val,vector<Node*>_neighbor){val=_val;neighbors=vector<Node*>();}
 };
 unordered_map<Node*,Node*>m;
