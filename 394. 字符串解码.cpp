@@ -45,3 +45,26 @@ string decodeString(string s){
     }
     return res;
 }
+
+string codecString(string& s){
+    int i=0;
+    return dfs(s,i);
+}
+string dfs(string&s ,int& idx){
+    int n=s.size();
+    int num=0;
+    string res;
+    for(;idx<n;idx++){
+        if(s[idx]>='0'&&s[idx]<='9'){
+            num=num*10+s[idx]-'0';
+        }
+        else if(s[idx]=='['){
+            string t=dfs(s,++idx);
+            while(num--)res+=t;
+            num=0;
+        }
+        else if(s[idx]==']')break;
+        else res+=s[idx];
+    }
+    return res;
+}
